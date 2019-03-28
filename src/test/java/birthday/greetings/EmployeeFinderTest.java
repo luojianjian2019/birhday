@@ -24,6 +24,13 @@ public class EmployeeFinderTest {
     }
 
     @Test
-    public void name() {
+    public void is_leap_year() {
+        //given
+        final LocalDate date = LocalDate.of(2019,2,24);
+        //when
+        EmployeeFinder employeeFinder = new EmployeeFinder();
+        List<Employee> employees = employeeFinder.finder(date);
+        //then
+        assertThat(employees).isNotNull();
     }
 }
