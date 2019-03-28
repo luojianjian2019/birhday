@@ -3,20 +3,34 @@
  */
 package birthday.greetings;
 
+import com.google.common.collect.Lists;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class EmployeeFinderTest {
+    private EmployeeRepository employeeRepository;
+
+    @Before
+    public void setUp() throws Exception {
+        employeeRepository = mock(EmployeeRepository.class);
+        when(employeeRepository.getEmployees()).thenReturn(Lists.newArrayList(
+                new Employee("ddd", "ggg", LocalDate.of(2019, 2, 23), "fdfd@qq.com"),
+                new Employee("kkk", "fff", LocalDate.of(2016, 2, 29), "4545@qq.com")));
+    }
+
     @Test
     public void should_find_employees_by_birthday() {
         //given
-        final LocalDate date = LocalDate.of(2019,2,23);
+        final LocalDate date = LocalDate.of(2019, 2, 23);
         //when
-        EmployeeFinder employeeFinder = new EmployeeFinder();
+        EmployeeFinder employeeFinder = new EmployeeFinder(employeeRepository);
         List<Employee> employees = employeeFinder.finder(date);
         //then
         assertThat(employees.get(0).getFirstName()).isEqualTo("ddd");
@@ -26,10 +40,21 @@ public class EmployeeFinderTest {
     @Test
     public void is_leap_year() {
         //given
-        final LocalDate date = LocalDate.of(2019,2,24);
+        final LocalDate date = LocalDate.of(2019, 2, 27);
         //when
-        EmployeeFinder employeeFinder = new EmployeeFinder();
+        EmployeeFinder employeeFinder = new EmployeeFinder(employeeRepository);
         List<Employee> employees = employeeFinder.finder(date);
+        //then
+        assertThat(employees).isNotNull();
+    }
+
+    @Test
+    public void should_get_employee_list() {
+        //given
+        String pathname = "d:/employee_records.txt";
+        //when
+        EmployeeFinder employeeFinder = new EmployeeFinder(employeeRepository);
+        List<Employee> employees = employeeFinder.getEmployeeList(pathname);
         //then
         assertThat(employees).isNotNull();
     }
