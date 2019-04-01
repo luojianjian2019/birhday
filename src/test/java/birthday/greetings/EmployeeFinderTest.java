@@ -53,8 +53,7 @@ public class EmployeeFinderTest {
         //given
         String pathname = "d:/employee_records.txt";
         //when
-        EmployeeFinder employeeFinder = new EmployeeFinder(employeeRepository);
-        List<Employee> employees = employeeFinder.getEmployeeList(pathname);
+        List<Employee> employees = employeeRepository.getEmployees();
         //then
         assertThat(employees).isNotNull();
     }
