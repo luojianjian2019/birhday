@@ -16,6 +16,7 @@ import static org.mockito.Mockito.when;
 
 public class EmployeeFinderTest {
     private EmployeeRepository employeeRepository;
+    private EmployeeFinder employeeFinder = new EmployeeFinder(employeeRepository);
 
     @Before
     public void setUp() throws Exception {
@@ -30,7 +31,6 @@ public class EmployeeFinderTest {
         //given
         final LocalDate date = LocalDate.of(2019, 2, 23);
         //when
-        EmployeeFinder employeeFinder = new EmployeeFinder(employeeRepository);
         List<Employee> employees = employeeFinder.finder(date);
         //then
         assertThat(employees.get(0).getFirstName()).isEqualTo("ddd");
@@ -42,7 +42,6 @@ public class EmployeeFinderTest {
         //given
         final LocalDate date = LocalDate.of(2019, 2, 27);
         //when
-        EmployeeFinder employeeFinder = new EmployeeFinder(employeeRepository);
         List<Employee> employees = employeeFinder.finder(date);
         //then
         assertThat(employees).isNotNull();

@@ -21,8 +21,10 @@ repositories {
 dependencies {
     implementation 'commons-io:commons-io:2.6'
     implementation 'com.google.guava:guava:27.0.1-jre'
-    
+    implementation 'org.jxls:jxls-reader:2.0.5'
+
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.assertj:assertj-core:3.12.2'
     testImplementation 'org.mockito:mockito-core:2.25.1'
+
 }
